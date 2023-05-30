@@ -1,7 +1,7 @@
 import React from "react";
 
-export default function List({
-    id, title, completed, todoData, setTodoData, provided, snapshot, handleClick, handleCompleChange}) {
+const List = React.memo( ({
+    id, title, completed, todoData, setTodoData, provided, snapshot, handleClick, handleCompleChange}) =>  {
   return (
     <div>
       <div
@@ -34,5 +34,7 @@ export default function List({
       </div>
     </div>
   );
-}
+});
+
+export default List;
 

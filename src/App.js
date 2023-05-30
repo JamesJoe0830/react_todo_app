@@ -1,5 +1,4 @@
-import { toHaveStyle } from "@testing-library/jest-dom/matchers";
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import "./App.css";
 import Form from "./components/Form";
 import Lists from "./components/Lists";
@@ -23,6 +22,12 @@ export default function App() {
     }
   };
 
+  // 🔥 useCallback으로 todoData가 바뀔때만 함수가 렌더링 되게하고 부모부터 자식까지 렌더링이 되게 만듦
+  const handleClick = useCallback((id) => {
+    let newTodoData = todoData.filter((data) => data.id !== id);
+    setTodoData(newTodoData);
+  }, [todoData]);
+
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-blue-100">
       <div className="w-full p-6 m-4 bg-white rounded shadow md:w-3/4 md:max-w-lg lg:w-3/4 lg max-w-lg">
@@ -30,7 +35,7 @@ export default function App() {
           <h1>할 일 목록</h1>
         </div>
 
-        <Lists todoData={todoData} setTodoData={setTodoData} />
+        <Lists handleClick ={handleClick} todoData={todoData} setTodoData={setTodoData} />
         <Form value={value} setValue={setValue} handleSubmit={handleSubmit} />
       </div>
     </div>
