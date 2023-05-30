@@ -22,6 +22,7 @@ const Lists = React.memo( ({ handleClick, todoData, setTodoData }) =>  {
       return data;
     });
     setTodoData(newTodoData);
+    localStorage.setItem('todoData', JSON.stringify(newTodoData));
   };
 
   const handleEnd = (result) => {
@@ -36,6 +37,7 @@ const Lists = React.memo( ({ handleClick, todoData, setTodoData }) =>  {
     //원하는 자리에 reorderedItem을 insert해줌  result.destination.index -> 목적지
     newTodoData.splice(result.destination.index, 0, reorderedItem);
     setTodoData(newTodoData);
+    localStorage.setItem('todoData', JSON.stringify(newTodoData));
   };
   return (
     <div>
